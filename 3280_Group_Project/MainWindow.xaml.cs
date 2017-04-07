@@ -23,6 +23,24 @@ namespace _3280_Group_Project
         public MainWindow()
         {
             InitializeComponent();
+            //populate customer list
+            //populate item list
+
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Brings up search window.
+        }
+
+        private void submitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Commits invoice to the DB. 
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Cancels current invoice and clears all fields.
         }
     }
 }
