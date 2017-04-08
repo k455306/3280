@@ -10,38 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace _3280_Group_Project
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SearchItemWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SearchItemWindow : Window
     {
-        /// <summary>
-        /// Search window object
-        /// </summary>
-        SearchItemWindow sw; 
+        InvoiceRepository db; 
 
-        public MainWindow()
+        public SearchItemWindow()
         {
             InitializeComponent();
-            ///Initialize the search Window
-            sw = new SearchItemWindow();
+            db = new InvoiceRepository();
+            DataTable dt = new DataTable();
+            dt = db.getAllInvoicesDT();
+            dg_search_item.ItemsSource = dt.DefaultView;
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        
-
-        }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            sw.Show();
+
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
