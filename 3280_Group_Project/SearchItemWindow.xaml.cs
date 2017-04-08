@@ -29,6 +29,12 @@ namespace _3280_Group_Project
             DataTable dt = new DataTable();
             dt = db.getAllInvoicesDT();
             dg_search_item.ItemsSource = dt.DefaultView;
+
+            Invoice invoice = new Invoice(2, "Adam", "Barnett", "JamesPainter@mail.weber.edu", "2753", 5, (decimal)20.00, DateTime.Now);
+
+            db.AddInvoice(invoice); 
+
+
         }
 
 

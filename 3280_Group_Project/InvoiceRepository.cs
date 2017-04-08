@@ -228,19 +228,23 @@ namespace _3280_Group_Project
 
             try
             {
-                string query = "INSERT INTO [Invoices]([invoiceID], [firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
-                                + "Values([invoiceID] = ?, [firstName] = ?, [lastName] = ?, [email] = ?, [address] = ?, [itemCount] = ?, [subtotal] = ?"
-                                + "[invoiceDate] = ?)";
-                OleDbCommand cmd = new OleDbCommand(query, OleDB);
-                // cmd.Parameters.AddWithValue("invoiceID", invoice.InvoiceID);
-                cmd.Parameters.AddWithValue("@[firstName]", invoice.FirstName);
-                cmd.Parameters.AddWithValue("@[lastName]", invoice.LastName);
-                cmd.Parameters.AddWithValue("@[email]", invoice.LastName);
-                cmd.Parameters.AddWithValue("@[address]", invoice.Address);
-                cmd.Parameters.AddWithValue("@[itemCount]", invoice.ItemCount);
-                cmd.Parameters.AddWithValue("@[subtotal]", invoice.SubTotal);
-                cmd.Parameters.AddWithValue("@[invoiceDate]", invoice.InvoiceDate); 
+                //string query = "INSERT INTO [Invoices]([itemID],[invoiceID], [firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
+                //                + "Values([itemID] = ?, [invoiceID] = ?, [firstName] = ?, [lastName] = ?, [email] = ?, [address] = ?, [itemCount] = ?, [subtotal] = ?,"
+                //                + "[invoiceDate] = ?)";
+                //OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                //cmd.Parameters.AddWithValue("@[invoiceID]", invoice.InvoiceID.ToString());
+                //cmd.Parameters.AddWithValue("@[firstName]", invoice.FirstName.ToString());
+                //cmd.Parameters.AddWithValue("@[lastName]", invoice.LastName.ToString());
+                //cmd.Parameters.AddWithValue("@[email]", invoice.Email.ToString());
+                //cmd.Parameters.AddWithValue("@[address]", invoice.Address.ToString());
+                //cmd.Parameters.AddWithValue("@[itemCount]", invoice.ItemCount.ToString());
+                //cmd.Parameters.AddWithValue("@[subtotal]", invoice.SubTotal.ToString());
+                //cmd.Parameters.AddWithValue("@[invoiceDate]", invoice.InvoiceDate.ToString()); 
 
+                string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
+                                + "Values('"+ invoice.FirstName.ToString()+"','"+ invoice.LastName.ToString()+"','"+ invoice.Email.ToString()+"','"+ invoice.Address.ToString()+"',"
+                                + invoice.ItemCount +","+ invoice.SubTotal+",'"+ invoice.InvoiceDate+"')";
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 cmd.ExecuteNonQuery();  
 
 
@@ -489,16 +493,18 @@ namespace _3280_Group_Project
 
             try
             {
-                string query = "INSERT INTO [Invoices]([invoiceID], [itemName], [itemCost], [itemDescription])"
-                                + "Values([invoiceID] = ?, [itemName] = ?, [itemCost] = ?, [itemDescription] = ?)";
-                OleDbCommand cmd = new OleDbCommand(query, OleDB);
-                // cmd.Parameters.AddWithValue("invoiceID", invoice.InvoiceID);
-                cmd.Parameters.AddWithValue("@[invoiceID]", item.InvoiceID);
-                cmd.Parameters.AddWithValue("@[itemName]", item.ItemName);
-                cmd.Parameters.AddWithValue("@[itemCost]", item.ItemCost);
-                cmd.Parameters.AddWithValue("@[itemDescription]", item.ItemDescription);
-               
+                //string query = "INSERT INTO [Invoices]([invoiceID], [itemName], [itemCost], [itemDescription])"
+                //                + "Values([invoiceID] = ?, [itemName] = ?, [itemCost] = ?, [itemDescription] = ?)";
+                //OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                //// cmd.Parameters.AddWithValue("invoiceID", invoice.InvoiceID);
+                //cmd.Parameters.AddWithValue("@[invoiceID]", item.InvoiceID);
+                //cmd.Parameters.AddWithValue("@[itemName]", item.ItemName);
+                //cmd.Parameters.AddWithValue("@[itemCost]", item.ItemCost);
+                //cmd.Parameters.AddWithValue("@[itemDescription]", item.ItemDescription);
 
+                string query = "INSERT INTO [Invoices]([invoiceID], [itemName], [itemCost], [address], [itemCount], [itemDescription])"
+                                + "Values(" + item.InvoiceID + ",'" + item.ItemName + "'," + item.ItemCost + ",'" + item.ItemDescription +"')";
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 cmd.ExecuteNonQuery();
 
 
