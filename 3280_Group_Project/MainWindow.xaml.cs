@@ -20,34 +20,27 @@ namespace _3280_Group_Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// Search window object
-        /// </summary>
-        SearchItemWindow sw; 
-
         public MainWindow()
         {
             InitializeComponent();
-            ///Initialize the search Window
-            
-        }
-
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        
+            //populate customer list
+            //populate item list
 
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            sw = new SearchItemWindow();
-            sw.ShowDialog();
+            //Brings up search window.
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Commits invoice to the DB. 
+        }
 
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Cancels current invoice and clears all fields.
         }
     }
 }
