@@ -29,7 +29,7 @@ namespace _3280_Group_Project
         {
             InitializeComponent();
             ///Initialize the search Window
-            sw = new SearchItemWindow();
+            
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
@@ -41,7 +41,8 @@ namespace _3280_Group_Project
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            sw.Show();
+            sw = new SearchItemWindow();
+            sw.ShowDialog();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
