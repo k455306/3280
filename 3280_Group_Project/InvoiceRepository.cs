@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.OleDb;
-using System.Reflection; 
+using System.Reflection;
+using System.Windows;
 
 /// <summary>
 /// _3280_Group_Project Namespace is used to search, edit and view invoices 
@@ -626,30 +627,21 @@ namespace _3280_Group_Project
         {
             ///total of the sum of item costs
             decimal total = 0;
+
+            MessageBox.Show("Before the query"+invoice.InvoiceID.ToString());
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             try
             {
-                string query = "SELECT SUM([itemCOST]) FROM [DEF] WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
+                string query = "SELECT SUM([itemCost]) FROM [DEF] WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
-                ///New Instance of OleDBAdator to store results from accessDBCommand 
-                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
-                ///Fill datatable with adaptor values 
-                accessAdaptor.Fill(dt);
-                ///Iterate through data table to find specific values 
-                foreach (DataRow row in dt.Rows)
-                {
-                    //Iterate through the columns that were returned
-                    foreach (DataColumn column in dt.Columns)
-                    {
-                        ///add values to String ArrayList 
-                        results.Add(row[column].ToString());
+               
 
-                    }
-                }
-                ///check to see that it can convert total 
-                Decimal.TryParse(results[0], out total);
+                /// Get total of itemCost
+                total = Convert.ToDecimal(string.Format("{0:0.00}", accessCommand.ExecuteScalar()));
+
+
                 ///return total 
                 return total; 
 
@@ -683,23 +675,9 @@ namespace _3280_Group_Project
                 string query = "SELECT COUNT([itemID]) FROM [DEF] WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
-                ///New Instance of OleDBAdator to store results from accessDBCommand 
-                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
-                ///Fill datatable with adaptor values 
-                accessAdaptor.Fill(dt);
-                ///Iterate through data table to find specific values 
-                foreach (DataRow row in dt.Rows)
-                {
-                    //Iterate through the columns that were returned
-                    foreach (DataColumn column in dt.Columns)
-                    {
-                        ///add values to String ArrayList 
-                        results.Add(row[column].ToString());
-
-                    }
-                }
-                ///check to see that it can convert total 
-                Int32.TryParse(results[0], out total);
+                /// Get total of invoiceID
+                total = (int) accessCommand.ExecuteScalar();
+             
                 ///return total 
                 return total;
 
