@@ -21,6 +21,7 @@
         <Label x:Name="totalLbl" Content="Total" HorizontalAlignment="Left" Margin="314,295,0,0" VerticalAlignment="Top" FontSize="9"/>
         <ComboBox x:Name="itemBox" HorizontalAlignment="Left" Margin="56,128,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="addItemBtn" Content="Add Item" HorizontalAlignment="Left" Margin="188,128,0,0" VerticalAlignment="Top" Width="58" Height="22" FontSize="10"/>
+        <Button x:Name="btn_Update" Content="Update" HorizontalAlignment="Left" Margin="334,91,0,0" VerticalAlignment="Top" Width="75" Height="22" FontSize="10" Click="btn_Update_Click"/>
 
     </Grid>
 </Window>

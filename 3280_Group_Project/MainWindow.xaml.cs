@@ -20,17 +20,24 @@ namespace _3280_Group_Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        SearchWindow MySearchWindow;
+        UpdateWindow MyUpdateWindow;
+
         public MainWindow()
         {
             InitializeComponent();
             //populate customer list
             //populate item list
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
+            MySearchWindow = new SearchWindow();
+            MyUpdateWindow = new UpdateWindow();
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
             //Brings up search window.
+            MySearchWindow.ShowDialog();
         }
 
         private void submitBtn_Click(object sender, RoutedEventArgs e)
@@ -41,6 +48,11 @@ namespace _3280_Group_Project
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             //Cancels current invoice and clears all fields.
+        }
+
+        private void btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            MyUpdateWindow.ShowDialog();
         }
     }
 }
