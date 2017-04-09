@@ -19,25 +19,78 @@ namespace _3280_Group_Project
     /// </summary>
     public partial class SearchWindow : Window
     {
+        InvoiceRepository myInvoices;
+
+        /// <summary>
+        /// Initialization which also poplulates the DataGrid with all the invoices.
+        /// </summary>
         public SearchWindow()
         {
             InitializeComponent();
+            //Call to getAllInvoices() which will return a list of Invoice Items that can then be inserted into the DataGrid
         }
 
+        /// <summary>
+        /// When user clicks on the close window ('X') this ensures that is doesn't close the window, but rather, hides it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Search_Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Hide();
             e.Cancel = true;
         }
 
+        /// <summary>
+        /// Selects the currently highlighted row in the DataGrid and sends the selected Invoice object back to MainWindow. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Select_Click(object sender, RoutedEventArgs e)
+        {
+            // Will call InvoiceRepository.SelectSingleInvoice method
+            // Pass Invoice object back to MainWindow
+
+            //Currently just closes the window
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Closes the search window, which takes the user back to MainWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }
 
-        private void btn_Cancel_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// When item is selected, will filter the DataGrid to to only show the criteria selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cb_InvoiceSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Hide();
+
+        }
+
+        /// <summary>
+        /// When DatePicker has selected a date, it calls method to filter based on date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dp_InvoiceDateSelect_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            updateDataGridDate();
+        }
+
+        /// <summary>
+        /// When item is selected, will filter the DataGrid to to only show the criteria selected based on Date
+        /// </summary>
+        private void updateDataGridDate()
+        {
+            //Method call that will request a
         }
     }
 }
