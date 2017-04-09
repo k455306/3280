@@ -20,7 +20,7 @@ namespace _3280_Group_Project
         /// <summary>
         /// conn is set to the connection string of the database3
         /// </summary>
-        internal string conn { get; set; } = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Invoices.accdb";
+        internal string conn { get; set; } = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=../../AppData/Invoices.accdb";
         /// <summary>
         /// Declaration of a list of strings for results
         /// </summary>
