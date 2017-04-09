@@ -7,25 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="421.734" Width="525">
     <Grid Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}">
-        <ComboBox x:Name="customer" HorizontalAlignment="Left" Margin="56,50,0,0" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="itemListBox" HorizontalAlignment="Left" Height="134" Margin="56,172,0,0" VerticalAlignment="Top" Width="253" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
-        <Button x:Name="submitBtn" Content="Submit" HorizontalAlignment="Left" Margin="181,362,0,0" VerticalAlignment="Top" Width="75" Click="submitBtn_Click" Height="21" FontSize="10"/>
-        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="314,362,0,0" VerticalAlignment="Top" Width="75" Click="cancelBtn_Click" Height="21" FontSize="10"/>
-        <TextBlock x:Name="customerInfoBox" HorizontalAlignment="Left" Margin="56,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="43" Width="120" RenderTransformOrigin="0.483,1.674" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
-        <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="330,103,0,0" VerticalAlignment="Top" Width="75" Click="searchBtn_Click" Height="22" FontSize="10"/>
+        <Button x:Name="submitBtn" Content="Submit" HorizontalAlignment="Left" Margin="181,362,0,0" VerticalAlignment="Top" Width="75" Click="submitBtn_Click" Height="21" FontSize="10.667"/>
+        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="314,362,0,0" VerticalAlignment="Top" Width="75" Click="cancelBtn_Click" Height="21" FontSize="10.667"/>
+        <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="361,104,0,0" VerticalAlignment="Top" Width="75" Click="searchBtn_Click" Height="22" FontSize="10.667"/>
         <ListBox x:Name="priceListBox" HorizontalAlignment="Left" Height="134" Margin="314,172,0,0" VerticalAlignment="Top" Width="122" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
         <Label x:Name="customerLbl" Content="Customer" HorizontalAlignment="Left" Margin="56,35,0,0" VerticalAlignment="Top" FontSize="9"/>
-        <Label x:Name="itemLbl" Content="Items" HorizontalAlignment="Left" Margin="56,130,0,0" VerticalAlignment="Top" FontSize="9"/>
+        <Label x:Name="itemLbl" Content="Items" HorizontalAlignment="Left" Margin="56,88,0,0" VerticalAlignment="Top" FontSize="9"/>
         <Label x:Name="priceLbl" Content="Price" HorizontalAlignment="Left" Margin="314,157,0,0" VerticalAlignment="Top" FontSize="9"/>
         <TextBox x:Name="totalBox" HorizontalAlignment="Left" Height="23" Margin="314,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="totalLbl" Content="Total" HorizontalAlignment="Left" Margin="314,311,0,0" VerticalAlignment="Top" FontSize="9"/>
-        <ComboBox x:Name="itemBox" HorizontalAlignment="Left" Margin="56,145,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="addItemBtn" Content="Add Item" HorizontalAlignment="Left" Margin="181,145,0,0" VerticalAlignment="Top" Width="58" Height="21" FontSize="10"/>
+        <ComboBox x:Name="itemBox" HorizontalAlignment="Left" Margin="56,104,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addItemBtn" Content="Add Item" HorizontalAlignment="Left" Margin="99,141,0,0" VerticalAlignment="Top" Width="58" Height="21" FontSize="10.667"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="519" Margin="0,0,-0.333,0">
             <MenuItem Header="Search" Click="MenuItem_Click"/>
             <MenuItem Header="Exit" Click="MenuItem_Click_1"/>
         </Menu>
-        <Button x:Name="delItemBtn" Content="Delete Item" HorizontalAlignment="Left" Margin="244,145,0,0" VerticalAlignment="Top" Width="65" Height="21"/>
+        <Button x:Name="delItemBtn" Content="Delete Item" HorizontalAlignment="Left" Margin="224,141,0,0" VerticalAlignment="Top" Width="65" Height="21" FontSize="10.667"/>
+        <TextBox x:Name="dateBox" HorizontalAlignment="Left" Height="22" Margin="330,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="textBox_TextChanged" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
+        <Label x:Name="dateLbl" Content="Date" HorizontalAlignment="Left" Margin="330,35,0,0" VerticalAlignment="Top" FontSize="9.333"/>
+        <TextBox x:Name="customerName" HorizontalAlignment="Left" Height="23" Margin="56,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
 
     </Grid>
 </Window>
