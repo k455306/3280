@@ -59,8 +59,12 @@ namespace _3280_Group_Project
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             //Closes program
-            this.Hide();        }
+            this.Close();
+        }
 
-       
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            MyUpdateWindow.ShowDialog();
+        }
     }
 }
