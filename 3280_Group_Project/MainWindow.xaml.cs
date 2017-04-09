@@ -42,5 +42,17 @@ namespace _3280_Group_Project
         {
             //Cancels current invoice and clears all fields.
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //Brings up search window.
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            //Closes program
+        }
+
+       
     }
 }
