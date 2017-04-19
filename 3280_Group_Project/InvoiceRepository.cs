@@ -25,11 +25,11 @@ namespace _3280_Group_Project
         /// <summary>
         /// Declaration of a list of strings for results
         /// </summary>
-        List<string> results; 
+        List<string> results;
         /// <summary>
         /// Declaration for OleDBConnection
         /// </summary>
-        OleDbConnection OleDB; 
+        OleDbConnection OleDB;
         /// <summary>
         /// InvoiceRepository Constructor to initialize connection 
         /// Opens OleDB connection
@@ -37,23 +37,23 @@ namespace _3280_Group_Project
         public InvoiceRepository()
         {
             ///Initialize results list for query results
-            results = new List<string>(); 
+            results = new List<string>();
             ///try opening initializing new connection 
             try
             {
                 ///initialize OleDB Connection 
                 OleDB = new OleDbConnection(conn);
                 ///Open OleDb Connection 
-                OleDB.Open(); 
+                OleDB.Open();
 
             }
-            catch(OleDbException ex)
+            catch (OleDbException ex)
             {
                 ///throws exception to the higher level method
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
 
             }
-            
+
         }
         /// <summary>
         /// Gets all invoices from the invoice table
@@ -100,17 +100,17 @@ namespace _3280_Group_Project
                     }
 
                 }
-               
+
             }
-            catch(OleDbException ex)
+            catch (OleDbException ex)
             {
                 ///Close Database Connection 
                 OleDB.Close();
                 ///throws exception to the higher level method
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
-                
+
             }
-             return invoices; 
+            return invoices;
 
         }
 
@@ -210,14 +210,14 @@ namespace _3280_Group_Project
                     ///give me each row of values 
                     if (i % 8 == 0)
                     {
-                       ///Create New Invoice Object
-                       invoice = new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7]));
-                      
+                        ///Create New Invoice Object
+                        invoice = new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                      Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7]));
+
                     }
 
                 }
-                
+
             }
             catch (OleDbException ex)
             {
@@ -240,19 +240,19 @@ namespace _3280_Group_Project
             ///Trys to execute insert query to the invoices table
             try
             {
-                
+
                 ///query string for insert into invoices table
                 string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
-                                + "Values('"+ invoice.FirstName.ToString()+"','"+ invoice.LastName.ToString()+"','"+ invoice.Email.ToString()+"','"+ invoice.Address.ToString()+"',"
-                                + invoice.ItemCount +","+ invoice.SubTotal+",'"+ invoice.InvoiceDate+"')";
+                                + "Values('" + invoice.FirstName.ToString() + "','" + invoice.LastName.ToString() + "','" + invoice.Email.ToString() + "','" + invoice.Address.ToString() + "',"
+                                + invoice.ItemCount.ToString() + "," + invoice.SubTotal.ToString() + ",'" + invoice.InvoiceDate.ToString() + "')";
                 ///Database command that uses OleDB object to execute the string query
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Executes the query from the command
-                cmd.ExecuteNonQuery();  
+                cmd.ExecuteNonQuery();
 
 
             }
-            catch(OleDbException ex)
+            catch (OleDbException ex)
             {
                 ///Close Database Connection 
                 OleDB.Close();
@@ -275,7 +275,7 @@ namespace _3280_Group_Project
                 ///update grand total 
                 invoice.SubTotal = GetGrandTotal(invoice);
                 ///update Item Count
-                invoice.ItemCount = GetItemCount(invoice); 
+                invoice.ItemCount = GetItemCount(invoice);
 
                 ///query to update invoice object in the invoices table
                 string query = "UPDATE [Invoices]"
@@ -292,7 +292,7 @@ namespace _3280_Group_Project
                 ///Executes the string query against the Database
                 cmd.ExecuteNonQuery();
                 ///Clase OleDB Connection 
-                OleDB.Close();        
+                OleDB.Close();
 
 
             }
@@ -317,7 +317,7 @@ namespace _3280_Group_Project
             {
                 ///string query is the query that will delete the invoice from invoices from invoice object
                 string query = "DELETE FROM [Invoices]"
-                               +"WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
+                               + "WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
                 ///Initialize new command object using the OleDB connection 
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Execute command from the string query
@@ -443,7 +443,7 @@ namespace _3280_Group_Project
                         ///Create New Invoice Object
                         item = new Def(Convert.ToInt32(results[i]), Convert.ToInt32(results[i + 1]), results[i + 2], Convert.ToDecimal(results[i + 3]), results[i + 4]);
 
-                     }
+                    }
 
                 }
 
@@ -529,10 +529,10 @@ namespace _3280_Group_Project
             ///try and inserting new item into the 
             try
             {
-                
+
                 ///Insert new items into the Def table 
                 string query = "INSERT INTO [Def]([invoiceID], [itemName], [itemCost], [itemDescription])"
-                                + "Values(" + item.InvoiceID + ",'" + item.ItemName + "'," + item.ItemCost + ",'" + item.ItemDescription +"')";
+                                + "Values(" + item.InvoiceID.ToString() + ",'" + item.ItemName + "'," + item.ItemCost.ToString() + ",'" + item.ItemDescription + "')";
                 ///Initialize new command to use the string query and OleDB connection
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Execute command 
@@ -628,7 +628,7 @@ namespace _3280_Group_Project
             ///total of the sum of item costs
             decimal total = 0;
 
-            MessageBox.Show("Before the query"+invoice.InvoiceID.ToString());
+            MessageBox.Show("Before the query" + invoice.InvoiceID.ToString());
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             try
@@ -636,25 +636,25 @@ namespace _3280_Group_Project
                 string query = "SELECT SUM([itemCost]) FROM [DEF] WHERE [invoiceID] = " + invoice.InvoiceID.ToString();
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
-               
+
 
                 /// Get total of itemCost
                 total = Convert.ToDecimal(string.Format("{0:0.00}", accessCommand.ExecuteScalar()));
 
 
                 ///return total 
-                return total; 
+                return total;
 
 
             }
-            catch(OleDbException ex)
+            catch (OleDbException ex)
             {
                 ///Close Database Connection 
                 OleDB.Close();
                 ///throws exception to the higher level method
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
             }
-            
+
         }
 
         /// <summary>
@@ -676,8 +676,8 @@ namespace _3280_Group_Project
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 /// Get total of invoiceID
-                total = (int) accessCommand.ExecuteScalar();
-             
+                total = (int)accessCommand.ExecuteScalar();
+
                 ///return total 
                 return total;
 
@@ -693,6 +693,358 @@ namespace _3280_Group_Project
 
         }
 
+/////////////////////////////////////////////////////////////////////Customer Methods/////////////////////////////////////////////
+/// <summary>
+/// Method GetCustomers is to get a list of customers
+/// </summary>
+/// <returns></returns>
+        public List<Customer> GetCustomers()
+        {
+            List<Customer> customers = new List<Customer>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Customer]";
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
 
-    }
-}
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 5 == 0)
+                    {
+                        // MessageBox.Show("Inside and i = "+i.ToString());
+                        customers.Add(new Customer(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4]));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+            return customers;
+
+        }
+
+        public Customer GetSingleCustomer(int id)
+        {
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            Customer customer = new Customer();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Customer] WHERE [customerID] = " + id.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 5 == 0)
+                    {
+                        ///Create New Customer Object
+                        customer = new Customer(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4]);
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+            return customer;
+        }
+
+        public void AddCustomer(Customer cust)
+        {
+            ///try and inserting new item into the 
+            try
+            {
+
+                ///Insert new items into the Def table 
+                string query = "INSERT INTO [Customer]([customerID], [custFirstName], [custLastName], [custAddress], [custEmail])"
+                                + "Values(" + cust.CustomerID.ToString() + ",'" + cust.CustFirstName + "','" + cust.CustLastName + "','" + cust.CustAddress + "','" + cust.CustEmail+ "')";
+                ///Initialize new command to use the string query and OleDB connection
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute command 
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+
+        }
+
+        public void UpdateCustomer(Customer cust)
+        {
+            ///try and inserting new item into the 
+            try
+            {
+
+                ///Insert new items into the Def table 
+                string query = "UPDATE [Customer]"
+                                +"custFirstName = " + cust.CustFirstName
+                                + "custLastName = " + cust.CustLastName
+                                + "custAddress = " + cust.CustAddress
+                                + "custFirstName = " + cust.CustEmail
+                                + "WHERE customerID = "+ cust.CustomerID.ToString();
+                ///Initialize new command to use the string query and OleDB connection
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute command 
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+
+        }
+        /////////////////////////////////////////////////////////////////////////////////////INVENTORY ITEMS////////////////////////////////////////////////
+        public List<Inventory> getAllInventoryItems()
+        {
+            ///Initialize new Invoice list 
+            List<Inventory> items = new List<Inventory>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Def]";
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 4 == 0)
+                    {
+                        // MessageBox.Show("Inside and i = "+i.ToString());
+                        items.Add(new Inventory(Convert.ToInt32(results[i]), results[i + 1], Convert.ToDecimal(results[i + 2]), results[i + 3]));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            ///Return a list of items
+            return items;
+
+        }
+
+
+        /// <summary>
+        /// Selects a single item from id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Inventory SelectSingleInventoryItem(int id)
+        {
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            ///New Inventory item object 
+            Inventory item = new Inventory();
+            /// try and select all items from the Def Table
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Inventory] WHERE [ID] = " + id.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 4 == 0)
+                    {
+                        ///Create New Invoice Object
+                        item = new Inventory(Convert.ToInt32(results[i]), results[i + 1], Convert.ToDecimal(results[i + 2]), results[i + 3]);
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+            return item;
+        }
+
+
+        /// <summary>
+        /// AddItem adds a new item to the Def Table
+        /// </summary>
+        /// <param name="item"></param>
+        public void AddInventoryItem(Inventory item)
+        {
+            ///try and inserting new item into the 
+            try
+            {
+
+                ///Insert new items into the Def table 
+                string query = "INSERT INTO [Inventory]([ID], [itemName], [itemCost], [itemDescription])"
+                                + "Values(" + item.ID.ToString() + ",'" + item.ItemName + "'," + item.ItemCost.ToString() + ",'" + item.ItemDescription + "')";
+                ///Initialize new command to use the string query and OleDB connection
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute command 
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+
+        }
+
+
+        public void UpdateInventoryItem(Inventory item)
+        {
+            ///Try and update item in the Def table
+            try
+            {
+                ///String query is to build the update statement to update the Def table
+                string query = "UPDATE [Def]"
+                                + "SET"
+                                + ", [itemName] = " + item.ItemName
+                                + ", [itemCost] = " + item.ItemCost.ToString()
+                                + ", [itemDescription] = " + item.ItemDescription
+                                + "WHERE itemID = " + item.ID.ToString();
+                ///Initialize the a new command to use the string query and OleDB connection 
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute command
+                cmd.ExecuteNonQuery();
+                ///Close OleDB Connection 
+                OleDB.Close();
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+        }
+
+    }///end of class
+}///end of namespace
