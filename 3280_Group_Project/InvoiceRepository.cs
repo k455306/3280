@@ -172,6 +172,124 @@ namespace _3280_Group_Project
             return dt;
 
         }
+
+        /// <summary>
+        /// get AllInvoicesDT gets all invoices and returns a DataTable of all Invoices that have date of what is passed in.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getAllInvoicesByDateDT(DateTime Date)
+        {
+            ///Initialize new Invoice list 
+            List<Invoice> invoices = new List<Invoice>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 8 == 0)
+                    {
+                        ///Adds new invoice to list of invoices
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            return dt;
+
+        }
+        /// <summary>
+        /// Gets all invoices from the invoice table
+        /// </summary>
+        /// <returns></returns>
+        public List<Invoice> getAllInvoicesByDate(DateTime Date)
+        {
+            ///Initialize new Invoice list 
+            List<Invoice> invoices = new List<Invoice>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 8 == 0)
+                    {
+                        ///Adds new invoices to list of Invoices 
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            return invoices;
+
+        }
+
         /// <summary>
         /// SelectSingleInvoice has a parameter of id and will return an invoice object 
         /// </summary>
