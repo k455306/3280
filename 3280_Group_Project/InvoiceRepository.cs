@@ -1046,5 +1046,37 @@ namespace _3280_Group_Project
 
         }
 
+        /// <summary>
+        /// Method DeleteInventoryItem is to delete an Item out of the inventory
+        /// </summary>
+        /// <param name="item"></param>
+        public void DeleteInventoryItem(Inventory item)
+        {
+            ///Try and Delete Item from the Def Table
+            try
+            {
+                ///string query is the Delete statement that will delete by the id of the item
+                string query = "DELETE FROM [Inventory]"
+                               + "WHERE [ID] = " + item.ID.ToString();
+                ///Initialize new command to use the string query and OleDB connection 
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute Command
+                cmd.ExecuteNonQuery();
+                ///Close Connection 
+                OleDB.Close();
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+        }
+
+
     }///end of class
 }///end of namespace
