@@ -56,7 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Customer.cs" />
     <Compile Include="Def.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceRepository.cs" />
     <Compile Include="SearchItemWindow.xaml.cs">
