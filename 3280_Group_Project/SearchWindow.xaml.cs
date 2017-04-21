@@ -22,6 +22,9 @@ namespace _3280_Group_Project
     {
         InvoiceRepository myInvoices;
         DataTable dt_Results;
+        List<Invoice> invoiceList;
+        Invoice selectedInvoice;
+        bool bIsFirstTime = true;
 
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the invoices.
@@ -32,10 +35,27 @@ namespace _3280_Group_Project
             //Call to getAllInvoices() which will return a list of Invoice Items that can then be inserted into the DataGrid
             myInvoices = new InvoiceRepository();
             dt_Results = new DataTable();
+            invoiceList = new List<Invoice>();
+            selectedInvoice = new Invoice();
 
             dt_Results = myInvoices.getAllInvoicesDT();
             dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
+            invoiceList = myInvoices.getAllInvoices();
+            UpdateInvoiceCombo();
+            bIsFirstTime = false;
         }
+
+        private void UpdateInvoiceCombo()
+        {
+            if (bIsFirstTime == true)
+            {
+                for (int i = 0; i < invoiceList.Count; i++)
+                {
+                    cb_InvoiceSelect.Items.Add(invoiceList[i].InvoiceID);
+                }
+            } 
+        }
+
 
         /// <summary>
         /// When user clicks on the close window ('X') this ensures that is doesn't close the window, but rather, hides it.

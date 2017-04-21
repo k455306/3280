@@ -94,8 +94,7 @@ namespace _3280_Group_Project
                     if (i % 6 == 0)
                     {
                         ///Adds new invoices to list of Invoices 
-                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToDateTime(results[i + 5])));
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],Convert.ToDateTime(results[i + 5])));
 
                     }
 

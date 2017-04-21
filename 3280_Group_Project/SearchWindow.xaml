@@ -11,7 +11,14 @@
         <Button x:Name="btn_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="95" Height="38" Click="btn_Cancel_Click"/>
         <ComboBox x:Name="cb_InvoiceSelect" HorizontalAlignment="Left" Height="43" Margin="10,39,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="cb_InvoiceSelect_SelectionChanged"/>
         <ComboBox x:Name="cb_ChargeSelect" HorizontalAlignment="Left" Height="43" Margin="355,39,0,0" VerticalAlignment="Top" Width="150"/>
-        <DataGrid x:Name="dg_InvoiceSearch" ItemsSource="{Binding}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="247" Width="495" Margin="10,93,0,0" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="dg_InvoiceSearch" ItemsSource="{Binding}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="247" Width="495" Margin="10,93,0,0" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=invoiceID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="First" Binding="{Binding Path=firstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last" Binding="{Binding Path=lastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=invoiceDate}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="btn_Clear" Content="Clear Selection" HorizontalAlignment="Left" Margin="291,345,0,0" VerticalAlignment="Top" Width="95" Height="38"/>
         <Label x:Name="label" Content="Invoice Number" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="10,0,0,355" Width="150" Height="28"/>
         <Label x:Name="label_Copy" Content="Invoice Date" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="185,0,0,357" Width="150" Grid.ColumnSpan="2"/>
