@@ -93,7 +93,8 @@ namespace _3280_Group_Project
                     if (i % 6 == 0)
                     {
                         ///Adds new invoices to list of Invoices 
-                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],Convert.ToDateTime(results[i + 5])));
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -116,6 +117,7 @@ namespace _3280_Group_Project
         /// <summary>
         /// GetItemCount
         /// </summary>
+        /// <param name="invoice"></param>
         /// <returns></returns>
         public int GetInvoiceCount()
         {
@@ -359,7 +361,7 @@ namespace _3280_Group_Project
             try
             {
                 ///query string to bring back all invoices from database
-                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = DatePart('d',"+ Date.ToString() +")";
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] >= #" + DateTime.Parse(Date.ToString()).ToString("mm-ss-yyyy") + "# AND [invoiceDate] <= #"+ DateTime.Parse(Date.ToString()).ToString("mm-ss-yyyy")+"#";
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 ///New Instance of OleDBAdator to store results from accessDBCommand 
@@ -477,7 +479,7 @@ namespace _3280_Group_Project
         /// <param name="GrandTotal"></param>
         /// <returns></returns>
         public DataTable GetInvoicesByCost(decimal GrandTotal)
-       {
+        {
             ///Invoices list from get all invoices 
             List<Invoice> invoices = new List<Invoice>();
             ///invoice list that equals the grandtotal list 
