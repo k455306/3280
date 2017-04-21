@@ -953,7 +953,6 @@ namespace _3280_Group_Project
             ///total of the sum of item costs
             decimal total = 0;
 
-            MessageBox.Show("Before the query" + invoice.InvoiceID.ToString());
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             try
@@ -1060,7 +1059,7 @@ namespace _3280_Group_Project
                     ///give me each row of values 
                     if (i % 5 == 0)
                     {
-                        // MessageBox.Show("Inside and i = "+i.ToString());
+                        ///Create New Customer List 
                         customers.Add(new Customer(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4]));
 
                     }
