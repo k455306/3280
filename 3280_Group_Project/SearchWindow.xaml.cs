@@ -180,8 +180,17 @@ namespace _3280_Group_Project
 
         private void dg_InvoiceSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedInvoice = (Invoice)dg_InvoiceSearch.SelectedItems[0];
-            TempSelect = selectedInvoice.InvoiceID;
+            DataGrid grid = (DataGrid)sender;
+            Invoice invoice = new Invoice();
+            IList<DataGridCellInfo> list = grid.SelectedCells;
+            foreach(DataGridCellInfo info in list)
+            {
+                //invoice.InvoiceID = info.Item;
+
+            }
+           
+
+            //TempSelect = selectedInvoice.InvoiceID;
         }
     }
 }

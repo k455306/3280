@@ -1240,6 +1240,42 @@ namespace _3280_Group_Project
 
         }
 
+        public DataTable getAllInventoryItemsDT()
+        {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
+            ///Initialize new Invoice list 
+            List<Inventory> items = new List<Inventory>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Inventory]";
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            ///Return a list of items
+            return dt;
+
+        }
+
         /// <summary>
         /// Selects a single item from id 
         /// </summary>
