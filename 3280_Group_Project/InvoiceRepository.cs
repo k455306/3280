@@ -1351,8 +1351,8 @@ namespace _3280_Group_Project
             {
 
                 ///Insert new items into the Def table 
-                string query = "INSERT INTO [Inventory]([itemName], [itemCost], [itemDescription])"
-                                + "Values("+item.ItemName + "'," + item.ItemCost.ToString() + ",'" + item.ItemDescription + "')";
+                string query = "INSERT INTO [Inventory] ([itemName], [itemCost], [itemDescription])"
+                                + "Values('"+item.ItemName.ToString()+"',"+item.ItemCost.ToString()+",'"+ item.ItemDescription.ToString()+ "')";
                 ///Initialize new command to use the string query and OleDB connection
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Execute command 

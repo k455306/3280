@@ -101,8 +101,8 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void btn_Select_Click(object sender, RoutedEventArgs e)
         {
-            MainAccess = new MainWindow();
-            MainAccess.searchInvoice(TempSelect);
+            //MainAccess = new MainWindow();
+            //MainAccess.searchInvoice(TempSelect);
 
             // Pass Invoice object back to MainWindow
 
@@ -178,6 +178,8 @@ namespace _3280_Group_Project
             newSearch();
         }
 
+
+        /*
         private void dg_InvoiceSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid grid = (DataGrid)sender;
@@ -185,7 +187,8 @@ namespace _3280_Group_Project
             DataRowView dataRow = (DataRowView)grid.SelectedItem;
             int index = grid.CurrentCell.Column.DisplayIndex;
             string cellValue = dataRow.Row.ItemArray[0].ToString();
-            TempSelect = Convert.ToInt32(cellValue);
+            MainWindow.searchInv = Convert.ToInt32(cellValue);
         }
+        */
     }
 }

@@ -75,6 +75,7 @@ namespace _3280_Group_Project
         {
             
             MySearchWindow.ShowDialog();
+            searchInvoice(searchInv);
         }
         /// <summary>
         /// Button click to commit invoice to the db
@@ -103,6 +104,7 @@ namespace _3280_Group_Project
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MySearchWindow.ShowDialog();
+
         }
         /// <summary>
         /// Closes program
@@ -111,7 +113,7 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
