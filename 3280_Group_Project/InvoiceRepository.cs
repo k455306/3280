@@ -22,10 +22,7 @@ namespace _3280_Group_Project
         /// conn is set to the connection string of the database3
         /// </summary>
         internal string conn { get; set; } = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=../../AppData/Invoices.accdb";
-        /// <summary>
-        /// Declaration of a list of strings for results
-        /// </summary>
-        List<string> results;
+        
         /// <summary>
         /// Declaration for OleDBConnection
         /// </summary>
@@ -36,8 +33,7 @@ namespace _3280_Group_Project
         /// </summary>
         public InvoiceRepository()
         {
-            ///Initialize results list for query results
-            results = new List<string>();
+           
             ///try opening initializing new connection 
             try
             {
@@ -64,6 +60,10 @@ namespace _3280_Group_Project
             ///Initialize new Invoice list 
             List<Invoice> invoices = new List<Invoice>();
             ///DataTable to store Adaptor values 
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>(); 
             DataTable dt = new DataTable();
             try
             {
@@ -119,6 +119,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public DataTable getAllInvoicesDT()
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Initialize new Invoice list 
             List<Invoice> invoices = new List<Invoice>();
             ///DataTable to store Adaptor values 
@@ -179,6 +183,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public DataTable getAllInvoicesByDateDT(DateTime Date)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Initialize new Invoice list 
             List<Invoice> invoices = new List<Invoice>();
             ///DataTable to store Adaptor values 
@@ -238,6 +246,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public List<Invoice> getAllInvoicesByDate(DateTime Date)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Initialize new Invoice list 
             List<Invoice> invoices = new List<Invoice>();
             ///DataTable to store Adaptor values 
@@ -298,6 +310,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public Invoice SelectSingleInvoice(int id)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             Invoice invoice = new Invoice();
@@ -357,6 +373,7 @@ namespace _3280_Group_Project
         /// <param name="invoice"></param>
         public void AddInvoice(Invoice invoice)
         {
+            
             ///Trys to execute insert query to the invoices table
             try
             {
@@ -462,6 +479,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public List<Def> getAllItems()
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Initialize new Invoice list 
             List<Def> items = new List<Def>();
             ///DataTable to store Adaptor values 
@@ -522,6 +543,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public Def SelectSingleItem(int id)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             ///New Def item object 
@@ -582,6 +607,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public List<Def> SelectItemsSingleInvoice(Invoice invoice)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             ///Initialize list of items of new List<Def>
@@ -641,6 +670,10 @@ namespace _3280_Group_Project
         /// <param name="item"></param>
         public void AddItem(Def item)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///try and inserting new item into the 
             try
             {
@@ -673,6 +706,10 @@ namespace _3280_Group_Project
         /// <param name="item"></param>
         public void UpdateItem(Def item)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Try and update item in the Def table
             try
             {
@@ -815,6 +852,10 @@ namespace _3280_Group_Project
 /// <returns></returns>
         public List<Customer> GetCustomers()
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             List<Customer> customers = new List<Customer>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
@@ -869,6 +910,10 @@ namespace _3280_Group_Project
 
         public Customer GetSingleCustomer(int id)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             Customer customer = new Customer();
@@ -981,6 +1026,10 @@ namespace _3280_Group_Project
         /////////////////////////////////////////////////////////////////////////////////////INVENTORY ITEMS////////////////////////////////////////////////
         public List<Inventory> getAllInventoryItems()
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///Initialize new Invoice list 
             List<Inventory> items = new List<Inventory>();
             ///DataTable to store Adaptor values 
@@ -988,7 +1037,7 @@ namespace _3280_Group_Project
             try
             {
                 ///query string to bring back all invoices from database
-                string query = "SELECT * FROM [Def]";
+                string query = "SELECT * FROM [Inventory]";
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 ///New Instance of OleDBAdator to store results from accessDBCommand 
@@ -1042,6 +1091,10 @@ namespace _3280_Group_Project
         /// <returns></returns>
         public Inventory SelectSingleInventoryItem(int id)
         {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
             ///New Inventory item object 
@@ -1135,7 +1188,7 @@ namespace _3280_Group_Project
             try
             {
                 ///String query is to build the update statement to update the Def table
-                string query = "UPDATE [Def]"
+                string query = "UPDATE [Inventory]"
                                 + "SET"
                                 + ", [itemName] = " + item.ItemName
                                 + ", [itemCost] = " + item.ItemCost.ToString()
