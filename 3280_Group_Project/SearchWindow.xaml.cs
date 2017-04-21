@@ -28,6 +28,11 @@ namespace _3280_Group_Project
         {
             InitializeComponent();
             //Call to getAllInvoices() which will return a list of Invoice Items that can then be inserted into the DataGrid
+
+
+
+
+
         }
 
         /// <summary>
