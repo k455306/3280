@@ -24,7 +24,6 @@ namespace _3280_Group_Project
         DataTable dt_Results;
         List<Invoice> invoiceList;
         Invoice selectedInvoice;
-        bool bIsFirstTime = true;
 
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the invoices.
@@ -108,17 +107,13 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void cb_InvoiceSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRow myNewRow = dt_Results.NewRow();
             int myID;
 
             if(cb_InvoiceSelect.SelectedIndex != -1 && Int32.TryParse(cb_InvoiceSelect.SelectedValue.ToString(), out myID))
             {
                 selectedInvoice =  myInvoices.SelectSingleInvoice(myID);
-                dt_Results.Clear();
-                myNewRow["ID"] = selectedInvoice.InvoiceID;
-                myNewRow["First"] = selectedInvoice.FirstName;
-                myNewRow["Last"] = selectedInvoice.LastName;
-                myNewRow["Date"] = selectedInvoice.InvoiceDate;
+                dt_Results = myInvoices.getAllInvoicesByID(myID);
+                dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
             }
         }
 
@@ -129,15 +124,31 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void dp_InvoiceDateSelect_CalendarClosed(object sender, RoutedEventArgs e)
         {
-            updateDataGridDate();
+            updateDataGridDate(dp_InvoiceDateSelect.SelectedDate.Value);
         }
 
         /// <summary>
         /// When item is selected, will filter the DataGrid to to only show the criteria selected based on Date
         /// </summary>
-        private void updateDataGridDate()
+        private void updateDataGridDate(DateTime myDate)
         {
-            //Method call that will request a
+            dt_Results = getAllInvoicesByDate(myDate);
+        }
+
+        /// <summary>
+        /// When user selects a value from the Total Cost drop down, this method will find the invoices that match that total and update the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cb_ChargeSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            decimal selCost;
+
+            if (cb_ChargeSelect.SelectedIndex != -1 && Decimal.TryParse(cb_ChargeSelect.SelectedValue.ToString(), out selCost))
+            {
+               // dt_Results = myInvoices.GetInvoicesByCost(selCost);
+                dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
+            }
         }
     }
 }

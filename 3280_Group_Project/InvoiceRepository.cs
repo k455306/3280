@@ -116,7 +116,6 @@ namespace _3280_Group_Project
         /// <summary>
         /// GetItemCount
         /// </summary>
-        /// <param name="invoice"></param>
         /// <returns></returns>
         public int GetInvoiceCount()
         {
