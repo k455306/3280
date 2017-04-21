@@ -55,8 +55,8 @@ namespace _3280_Group_Project
            decimal total = db.GetGrandTotal(invoice);
            ///Testing count off of GetiTemCount
            decimal count = db.GetItemCount(invoice);
-           
-           
+
+       
 
         }
 
