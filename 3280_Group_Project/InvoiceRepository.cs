@@ -965,11 +965,17 @@ namespace _3280_Group_Project
 
 
                 /// Get total of itemCost
-                total = Convert.ToDecimal(string.Format("{0:0.00}", accessCommand.ExecuteScalar()));
+                //total = Convert.ToDecimal(string.Format("{0:0.00}", accessCommand.ExecuteScalar()));
+                if(!Decimal.TryParse(string.Format("{0:0.00}", accessCommand.ExecuteScalar()),out total))
+                {
+                    return 0; 
+                }
+                else
+                {
+                    ///return total 
+                    return total;
 
-
-                ///return total 
-                return total;
+                }
 
 
             }
