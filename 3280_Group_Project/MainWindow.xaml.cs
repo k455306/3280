@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,10 @@ namespace _3280_Group_Project
 
             MySearchWindow = new SearchWindow();
             MyUpdateWindow = new UpdateWindow();
+
+            InvoiceRepository repo = new InvoiceRepository();
+            DataTable Table = new DataTable();
+            Table = repo.getAllInvoicesByDate(DateTime.Now);
 
         }
 
