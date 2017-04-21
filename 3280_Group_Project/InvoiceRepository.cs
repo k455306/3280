@@ -493,6 +493,10 @@ namespace _3280_Group_Project
                 ///loop through all invoices 
                 foreach(Invoice invoice in invoices)
                 {
+                    if(GetGrandTotal(invoice).Equals(null))
+                    {
+                        continue; 
+                    }
                     ///check the grandTotal of invoice that has the the grand total passed in 
                     if(GetGrandTotal(invoice) == GrandTotal)
                     {
