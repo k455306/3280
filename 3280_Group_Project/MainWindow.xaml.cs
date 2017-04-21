@@ -85,5 +85,15 @@ namespace _3280_Group_Project
         {
             MyUpdateWindow.ShowDialog();
         }
+
+        private void addItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
