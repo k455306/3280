@@ -35,15 +35,14 @@ namespace _3280_Group_Project
             NewItem = new Inventory();
             myInventoryList = new List<Inventory>();
             dt_Results = new DataTable();
+            newSearch();
 
         }
 
         private void newSearch()
         {
-            myInventoryList = myItems.getAllInventoryItems();
-            //dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
-            //invoiceList = myInvoices.getAllInvoices();
-            //updateCombos();
+            dt_Results = myItems.getAllInventoryItemsDT();
+            dg_UpdateDef.DataContext = dt_Results.DefaultView;
         }
 
 
@@ -83,6 +82,7 @@ namespace _3280_Group_Project
 
             //Call to the InvoiceRepository.AddItem method
             myItems.AddInventoryItem(NewItem);
+            newSearch();
         }
 
         /// <summary>
