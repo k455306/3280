@@ -22,7 +22,6 @@ namespace _3280_Group_Project
         /// conn is set to the connection string of the database3
         /// </summary>
         internal string conn { get; set; } = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=../../AppData/Invoices.accdb";
-        
         /// <summary>
         /// Declaration for OleDBConnection
         /// </summary>
@@ -110,9 +109,48 @@ namespace _3280_Group_Project
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
 
             }
+            ///return list of invoices 
             return invoices;
 
         }
+
+        /// <summary>
+        /// GetItemCount
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public int GetInvoiceCount()
+        {
+            ///count of items with the invoice id 
+            int total = 0;
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            ///Try and get the count of items of invoice
+            try
+            {
+                ///string query get count fo the itemID with invoice ID.
+                string query = "SELECT COUNT([InvoiceID]) FROM [Invoice]";
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                /// Get total of invoiceID
+                total = (int)accessCommand.ExecuteScalar();
+
+                ///return total 
+                return total;
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+
+        }
+
+
 
         /// <summary>
         /// get AllInvoicesDT gets all invoices and returns a DataTable
@@ -221,7 +259,6 @@ namespace _3280_Group_Project
                     if (i % 6 == 0)
                     {
                         ///Adds new invoice to list of invoices
-                        
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
                                      Convert.ToDateTime(results[i + 5])));
 
@@ -241,6 +278,72 @@ namespace _3280_Group_Project
             return dt;
 
         }
+
+        /// <summary>
+        /// get AllInvoicesDT gets all invoices and returns a DataTable of all Invoices that have date of what is passed in.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getAllInvoicesByID(int ID)
+        {
+            /// <summary>
+            /// Declaration of a list of strings for results
+            /// </summary>
+            List<string> results = new List<string>();
+            ///Initialize new Invoice list 
+            List<Invoice> invoices = new List<Invoice>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceID] = " + ID.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 6 == 0)
+                    {
+                        ///Adds new invoice to list of invoices
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                     Convert.ToDateTime(results[i + 5])));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            return dt;
+
+        }
+
+
+
         /// <summary>
         /// Gets all invoices from the invoice table
         /// </summary>
@@ -300,6 +403,7 @@ namespace _3280_Group_Project
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
 
             }
+            ///return list of invoices
             return invoices;
 
         }
@@ -317,6 +421,7 @@ namespace _3280_Group_Project
             List<string> results = new List<string>();
             ///DataTable to store Adaptor values 
             DataTable dt = new DataTable();
+            ///Initialize new invoice object 
             Invoice invoice = new Invoice();
             try
             {
@@ -367,6 +472,47 @@ namespace _3280_Group_Project
             ///Returns invoice object
             return invoice;
         }
+        
+        /// <summary>
+        /// Get invoices by grand total
+        /// </summary>
+        /// <param name="GrandTotol"></param>
+        /// <returns></returns>
+        public List<Invoice> GetInvoicesByCost(decimal GrandTotol)
+        {
+            ///Invoices list from get all invoices 
+            List<Invoice> invoices = new List<Invoice>();
+            ///invoice list that equals the grandtotal list 
+            List<Invoice> invoicesResult = new List<Invoice>();
+            ///Try and get list of the invoices with a grand total  
+            try
+            {
+                ///get all invoices 
+                invoices = getAllInvoices(); 
+                ///loop through all invoices 
+                foreach(Invoice invoice in invoices)
+                {
+                    ///check the grandTotal of invoice that has the the grand total passed in 
+                    if(GetGrandTotal(invoice) == GrandTotol)
+                    {
+                        ///add invoices that have the same grand total 
+                        invoicesResult.Add(invoice);
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            ///return list of invoices 
+            return invoicesResult; 
+        }
+
 
         /// <summary>
         /// Add invoice has parameter of Invoice object and has no return type
@@ -410,7 +556,6 @@ namespace _3280_Group_Project
             ///try to update invoice object in the database 
             try
             {
-               
 
                 ///query to update invoice object in the invoices table
                 string query = "UPDATE [Invoices]"
@@ -846,6 +991,9 @@ namespace _3280_Group_Project
 
         }
 
+
+
+
 /////////////////////////////////////////////////////////////////////Customer Methods/////////////////////////////////////////////
 /// <summary>
 /// Method GetCustomers is to get a list of customers
@@ -970,7 +1118,6 @@ namespace _3280_Group_Project
             ///try and inserting new item into the 
             try
             {
-
                 ///Insert new items into the Def table 
                 string query = "INSERT INTO [Customer]([customerID], [custFirstName], [custLastName], [custAddress], [custEmail])"
                                 + "Values(" + cust.CustomerID.ToString() + ",'" + cust.CustFirstName + "','" + cust.CustLastName + "','" + cust.CustAddress + "','" + cust.CustEmail+ "')";
@@ -978,8 +1125,6 @@ namespace _3280_Group_Project
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Execute command 
                 cmd.ExecuteNonQuery();
-
-
             }
             catch (OleDbException ex)
             {
@@ -992,7 +1137,10 @@ namespace _3280_Group_Project
 
 
         }
-
+        /// <summary>
+        /// Updates the customer table 
+        /// </summary>
+        /// <param name="cust"></param>
         public void UpdateCustomer(Customer cust)
         {
             ///try and inserting new item into the 
@@ -1149,7 +1297,6 @@ namespace _3280_Group_Project
             return item;
         }
 
-
         /// <summary>
         /// AddItem adds a new item to the Def Table
         /// </summary>
@@ -1182,7 +1329,10 @@ namespace _3280_Group_Project
 
         }
 
-
+        /// <summary>
+        /// Method UpdateInventoryItem passes in an inventory item. 
+        /// </summary>
+        /// <param name="item"></param>
         public void UpdateInventoryItem(Inventory item)
         {
             ///Try and update item in the Def table
