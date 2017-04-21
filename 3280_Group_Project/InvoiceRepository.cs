@@ -348,7 +348,7 @@ namespace _3280_Group_Project
         /// Gets all invoices from the invoice table
         /// </summary>
         /// <returns></returns>
-        public List<Invoice> getAllInvoicesByDate(DateTime Date)
+        public DataTable getAllInvoicesByDate(DateTime Date)
         {
             /// <summary>
             /// Declaration of a list of strings for results
@@ -404,7 +404,7 @@ namespace _3280_Group_Project
 
             }
             ///return list of invoices
-            return invoices;
+            return dt;
 
         }
 
@@ -476,14 +476,17 @@ namespace _3280_Group_Project
         /// <summary>
         /// Get invoices by grand total
         /// </summary>
-        /// <param name="GrandTotol"></param>
+        /// <param name="GrandTotal"></param>
         /// <returns></returns>
-        public List<Invoice> GetInvoicesByCost(decimal GrandTotol)
+        public DataTable GetInvoicesByCost(decimal GrandTotal)
         {
             ///Invoices list from get all invoices 
             List<Invoice> invoices = new List<Invoice>();
             ///invoice list that equals the grandtotal list 
             List<Invoice> invoicesResult = new List<Invoice>();
+            ///Create new datatable to return 
+            DataTable dt = new DataTable();
+            
             ///Try and get list of the invoices with a grand total  
             try
             {
@@ -493,13 +496,37 @@ namespace _3280_Group_Project
                 foreach(Invoice invoice in invoices)
                 {
                     ///check the grandTotal of invoice that has the the grand total passed in 
-                    if(GetGrandTotal(invoice) == GrandTotol)
+                    if(GetGrandTotal(invoice) == GrandTotal)
                     {
                         ///add invoices that have the same grand total 
                         invoicesResult.Add(invoice);
                     }
 
                 }
+
+                dt.Columns.Add("invoiceID");
+                dt.Columns.Add("firstName");
+                dt.Columns.Add("lastName");
+                dt.Columns.Add("email");
+                dt.Columns.Add("Address");
+                dt.Columns.Add("invoiceDate");
+                foreach (var invoice in invoicesResult)
+                {
+                    var row = dt.NewRow();
+
+                    row["invoiceID"] = invoice.InvoiceID;
+                    row["firstName"] = invoice.FirstName;
+                    row["lastName"] = invoice.LastName;
+                    row["email"] = invoice.Email;
+                    row["Address"] = invoice.Address;
+                    row["invoiceDate"] = invoice.InvoiceDate;
+
+                    dt.Rows.Add(row);
+                }
+
+                
+
+
             }
             catch(Exception ex)
             {
@@ -510,7 +537,7 @@ namespace _3280_Group_Project
 
             }
             ///return list of invoices 
-            return invoicesResult; 
+            return dt;
         }
 
 
@@ -991,14 +1018,11 @@ namespace _3280_Group_Project
 
         }
 
-
-
-
-/////////////////////////////////////////////////////////////////////Customer Methods/////////////////////////////////////////////
-/// <summary>
-/// Method GetCustomers is to get a list of customers
-/// </summary>
-/// <returns></returns>
+        /////////////////////////////////////////////////////////////////////Customer Methods/////////////////////////////////////////////
+        /// <summary>
+        /// Method GetCustomers is to get a list of customers
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> GetCustomers()
         {
             /// <summary>
@@ -1052,7 +1076,7 @@ namespace _3280_Group_Project
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
 
             }
-
+            ///return customers 
             return customers;
 
         }
@@ -1087,8 +1111,6 @@ namespace _3280_Group_Project
 
                     }
                 }
-
-
                 ///Iterate through the list of results and create new object
                 for (int i = 0; i < results.Count; i++)
                 {
@@ -1231,7 +1253,6 @@ namespace _3280_Group_Project
             return items;
 
         }
-
 
         /// <summary>
         /// Selects a single item from id 
