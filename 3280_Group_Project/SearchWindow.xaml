@@ -11,7 +11,7 @@
         <Button x:Name="btn_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="95" Height="38" Click="btn_Cancel_Click"/>
         <ComboBox x:Name="cb_InvoiceSelect" HorizontalAlignment="Left" Height="43" Margin="10,39,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="cb_InvoiceSelect_SelectionChanged"/>
         <ComboBox x:Name="cb_ChargeSelect" HorizontalAlignment="Left" Height="43" Margin="355,41,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="cb_ChargeSelect_SelectionChanged"/>
-        <DataGrid x:Name="dg_InvoiceSearch" ItemsSource="{Binding}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="247" Width="495" Margin="10,93,0,0" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+        <DataGrid x:Name="dg_InvoiceSearch" ItemsSource="{Binding}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="247" Width="495" Margin="10,93,0,0" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionChanged="dg_InvoiceSearch_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=invoiceID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="First" Binding="{Binding Path=firstName}"></DataGridTextColumn>

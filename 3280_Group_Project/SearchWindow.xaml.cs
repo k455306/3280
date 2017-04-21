@@ -24,6 +24,7 @@ namespace _3280_Group_Project
         DataTable dt_Results;
         List<Invoice> invoiceList;
         Invoice selectedInvoice;
+        static int TempSelect = 0;
 
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the invoices.
@@ -98,8 +99,10 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void btn_Select_Click(object sender, RoutedEventArgs e)
         {
-            // Will call InvoiceRepository.SelectSingleInvoice method
+            MainWindow.searchInv = TempSelect;
+
             // Pass Invoice object back to MainWindow
+
 
             //Currently just closes the window
             this.Hide();
@@ -148,6 +151,7 @@ namespace _3280_Group_Project
         private void updateDataGridDate(DateTime myDate)
         {
             dt_Results = myInvoices.getAllInvoicesByDate(myDate);
+            dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
         }
 
         /// <summary>
@@ -169,6 +173,12 @@ namespace _3280_Group_Project
         private void btn_Clear_Click(object sender, RoutedEventArgs e)
         {
             newSearch();
+        }
+
+        private void dg_InvoiceSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedInvoice = (Invoice)dg_InvoiceSearch.SelectedItems;
+            TempSelect = selectedInvoice.InvoiceID;
         }
     }
 }

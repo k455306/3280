@@ -363,7 +363,7 @@ namespace _3280_Group_Project
                 ///query string to bring back all invoices from database
                 string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] >= #" 
                                 + DateTime.Parse(Date.ToString()).ToString("MM/dd/yyyy") 
-                                + "# AND [invoiceDate] <= #"+ DateTime.Parse(Date.ToString()).ToString("MM/dd/yyyy")+"#";
+                                + " 00:00:00# AND [invoiceDate] <= #"+ DateTime.Parse(Date.ToString()).ToString("MM/dd/yyyy")+" 23:59:59#";
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 ///New Instance of OleDBAdator to store results from accessDBCommand 
