@@ -132,7 +132,7 @@ namespace _3280_Group_Project
         /// </summary>
         private void updateDataGridDate(DateTime myDate)
         {
-            dt_Results = getAllInvoicesByDate(myDate);
+            dt_Results = myInvoices.getAllInvoicesByDate(myDate);
         }
 
         /// <summary>
