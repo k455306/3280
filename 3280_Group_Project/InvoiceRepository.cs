@@ -233,7 +233,7 @@ namespace _3280_Group_Project
             try
             {
                 ///query string to bring back all invoices from database
-                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.ToString();
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.Date.ToString();
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 ///New Instance of OleDBAdator to store results from accessDBCommand 
