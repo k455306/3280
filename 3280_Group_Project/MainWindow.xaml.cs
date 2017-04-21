@@ -28,6 +28,7 @@ namespace _3280_Group_Project
         List<Invoice> Invoices;
         InvoiceRepository iR;
         decimal total;
+        public static int searchInv;
 
         public MainWindow()
         {
@@ -46,6 +47,7 @@ namespace _3280_Group_Project
             //Set Customers to list
             Customers = iR.GetCustomers();
             Invoices = new List<Invoice>();
+            Invoices = iR.getAllInvoices();
 
             MySearchWindow = new SearchWindow();
             MyUpdateWindow = new UpdateWindow();
@@ -80,9 +82,8 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Commits invoice to the DB. 
-            
-            //iR.AddInvoice();
+            createInv();
+            clear();
         }
         /// <summary>
         /// Clears invoice screen
@@ -91,10 +92,7 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            itemListBox.Items.Clear();
-            customerBox.SelectedIndex = -1;
-            itemBox.SelectedIndex = -1;
-            totalBox.Clear();
+            clear();
         }
         /// <summary>
         /// Brings up search window
@@ -158,6 +156,56 @@ namespace _3280_Group_Project
             }
             
         }
+        private void createInv()
+        {
+            Invoice invoice = new Invoice();
+            List<Customer> customers = new List<Customer>();
+            customers = iR.GetCustomers(); 
 
+            foreach(Customer customer in customers)
+            {
+                foreach(Invoice invo in Invoices)
+                {
+
+                    if (customer.CustFirstName == invo.FirstName && customer.CustLastName == invo.LastName)
+                    {
+                        invoice.FirstName = invo.FirstName;
+                        invoice.LastName = invo.LastName;
+                        invoice.Email = invo.Email;
+                        invoice.Address = invo.Address; 
+                        
+                    }
+                }             
+            }
+        }
+
+        private void addItems()
+        {
+            foreach (ItemCollection it in itemListBox.Items)
+            {
+                Def Item = new Def();
+                Item.InvoiceID = iR.GetInvoiceCount();
+                Item.ItemName = it.ToString().Substring(0, 2);
+
+                iR.AddItem(Item);
+            }
+        }
+        private void clear()
+        {
+            itemListBox.Items.Clear();
+            customerBox.SelectedIndex = -1;
+            itemBox.SelectedIndex = -1;
+            totalBox.Clear();
+        }
+
+        private void searchItems()
+        {
+
+        }
+        private void searchInvoice(int invNum)
+        {
+           
+         //  = iR.SelectSingleInvoice(invNum);
+        }
     }
 }
