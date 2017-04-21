@@ -95,7 +95,7 @@ namespace _3280_Group_Project
                     {
                         ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -153,8 +153,9 @@ namespace _3280_Group_Project
                     if (i % 8 == 0)
                     {
                         ///Adds new invoice to list of invoices
+                        ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -172,6 +173,125 @@ namespace _3280_Group_Project
             return dt;
 
         }
+
+        /// <summary>
+        /// get AllInvoicesDT gets all invoices and returns a DataTable of all Invoices that have date of what is passed in.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getAllInvoicesByDateDT(DateTime Date)
+        {
+            ///Initialize new Invoice list 
+            List<Invoice> invoices = new List<Invoice>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 8 == 0)
+                    {
+                        ///Adds new invoice to list of invoices
+                        
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                     Convert.ToDateTime(results[i + 5])));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            return dt;
+
+        }
+        /// <summary>
+        /// Gets all invoices from the invoice table
+        /// </summary>
+        /// <returns></returns>
+        public List<Invoice> getAllInvoicesByDate(DateTime Date)
+        {
+            ///Initialize new Invoice list 
+            List<Invoice> invoices = new List<Invoice>();
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            try
+            {
+                ///query string to bring back all invoices from database
+                string query = "SELECT * FROM [Invoices] WHERE [invoiceDate] = " + Date.ToString();
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                ///New Instance of OleDBAdator to store results from accessDBCommand 
+                OleDbDataAdapter accessAdaptor = new OleDbDataAdapter(accessCommand);
+                ///Fill datatable with adaptor values 
+                accessAdaptor.Fill(dt);
+                ///Iterate through data table to find specific values 
+                foreach (DataRow row in dt.Rows)
+                {
+                    //Iterate through the columns that were returned
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        ///add values to String ArrayList 
+                        results.Add(row[column].ToString());
+
+                    }
+                }
+
+                ///Iterate through the list of results and create new object
+                for (int i = 0; i < results.Count; i++)
+                {
+                    ///give me each row of values 
+                    if (i % 8 == 0)
+                    {
+                        ///Adds new invoices to list of Invoices 
+                        invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
+                                    Convert.ToDateTime(results[i + 5])));
+
+                    }
+
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            return invoices;
+
+        }
+
         /// <summary>
         /// SelectSingleInvoice has a parameter of id and will return an invoice object 
         /// </summary>
@@ -211,8 +331,9 @@ namespace _3280_Group_Project
                     if (i % 8 == 0)
                     {
                         ///Create New Invoice Object
+                       ///Adds new invoices to list of Invoices 
                         invoice = new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                      Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7]));
+                                     Convert.ToDateTime(results[i + 5]));
 
                     }
 
@@ -242,9 +363,9 @@ namespace _3280_Group_Project
             {
 
                 ///query string for insert into invoices table
-                string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
+                string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address],[invoiceDate])"
                                 + "Values('" + invoice.FirstName.ToString() + "','" + invoice.LastName.ToString() + "','" + invoice.Email.ToString() + "','" + invoice.Address.ToString() + "',"
-                                + invoice.ItemCount.ToString() + "," + invoice.SubTotal.ToString() + ",'" + invoice.InvoiceDate.ToString() + "')";
+                                + invoice.InvoiceDate.ToString() + "')";
                 ///Database command that uses OleDB object to execute the string query
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Executes the query from the command
@@ -272,10 +393,7 @@ namespace _3280_Group_Project
             ///try to update invoice object in the database 
             try
             {
-                ///update grand total 
-                invoice.SubTotal = GetGrandTotal(invoice);
-                ///update Item Count
-                invoice.ItemCount = GetItemCount(invoice);
+               
 
                 ///query to update invoice object in the invoices table
                 string query = "UPDATE [Invoices]"
@@ -283,8 +401,6 @@ namespace _3280_Group_Project
                                 + "', [lastName] = '" + invoice.LastName.ToString()
                                 + "', [email] = '" + invoice.Email.ToString()
                                 + "', [address] = '" + invoice.Address.ToString()
-                                + "', [itemCount] = " + invoice.ItemCount.ToString()
-                                + ", [subTotal] = " + invoice.SubTotal.ToString()
                                 + ", [invoiceDate] = '" + invoice.InvoiceDate.ToString()
                                 + "' WHERE invoiceID = " + invoice.InvoiceID.ToString();
                 ///initialize new command to executr string query with OleDB Connection
@@ -1045,6 +1161,38 @@ namespace _3280_Group_Project
             }
 
         }
+
+        /// <summary>
+        /// Method DeleteInventoryItem is to delete an Item out of the inventory
+        /// </summary>
+        /// <param name="item"></param>
+        public void DeleteInventoryItem(Inventory item)
+        {
+            ///Try and Delete Item from the Def Table
+            try
+            {
+                ///string query is the Delete statement that will delete by the id of the item
+                string query = "DELETE FROM [Inventory]"
+                               + "WHERE [ID] = " + item.ID.ToString();
+                ///Initialize new command to use the string query and OleDB connection 
+                OleDbCommand cmd = new OleDbCommand(query, OleDB);
+                ///Execute Command
+                cmd.ExecuteNonQuery();
+                ///Close Connection 
+                OleDB.Close();
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+
+        }
+
 
     }///end of class
 }///end of namespace

@@ -44,15 +44,15 @@ namespace _3280_Group_Project
             ///Set datagrid to datatable returned from the database 
             dg_search_item.ItemsSource = dt.DefaultView;
             ///Declare and initialize new invoice object 
-            Invoice invoice = new Invoice(2, "Adam", "Barnett", "JamesPainter@mail.weber.edu", "2753", 0, (decimal)0.00, DateTime.Now);
+            Invoice invoice = new Invoice(2, "Adam", "Barnett", "JamesPainter@mail.weber.edu","3575 SOUTH iowA", DateTime.Now);
             ///Inserts new invoice into the database 
             db.AddInvoice(invoice);
           
-            ///Update Invoice 
-            invoice = db.SelectSingleInvoice(1);
+           //Update Invoice 
+           invoice = db.SelectSingleInvoice(1);
           
-            decimal total = db.GetGrandTotal(invoice);
-            decimal count = db.GetItemCount(invoice);
+           decimal total = db.GetGrandTotal(invoice);
+           decimal count = db.GetItemCount(invoice);
            
            
 
