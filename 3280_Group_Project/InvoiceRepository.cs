@@ -95,7 +95,7 @@ namespace _3280_Group_Project
                     {
                         ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -153,8 +153,9 @@ namespace _3280_Group_Project
                     if (i % 8 == 0)
                     {
                         ///Adds new invoice to list of invoices
+                        ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -212,8 +213,9 @@ namespace _3280_Group_Project
                     if (i % 8 == 0)
                     {
                         ///Adds new invoice to list of invoices
+                        
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                     Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -271,7 +273,7 @@ namespace _3280_Group_Project
                     {
                         ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                     Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7])));
+                                    Convert.ToDateTime(results[i + 5])));
 
                     }
 
@@ -329,8 +331,9 @@ namespace _3280_Group_Project
                     if (i % 8 == 0)
                     {
                         ///Create New Invoice Object
+                       ///Adds new invoices to list of Invoices 
                         invoice = new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
-                                      Convert.ToInt32(results[i + 5]), Convert.ToDecimal(results[i + 6]), Convert.ToDateTime(results[i + 7]));
+                                     Convert.ToDateTime(results[i + 5]));
 
                     }
 
@@ -360,9 +363,9 @@ namespace _3280_Group_Project
             {
 
                 ///query string for insert into invoices table
-                string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address], [itemCount], [subtotal],[invoiceDate])"
+                string query = "INSERT INTO [Invoices]([firstName], [lastName], [email], [address],[invoiceDate])"
                                 + "Values('" + invoice.FirstName.ToString() + "','" + invoice.LastName.ToString() + "','" + invoice.Email.ToString() + "','" + invoice.Address.ToString() + "',"
-                                + invoice.ItemCount.ToString() + "," + invoice.SubTotal.ToString() + ",'" + invoice.InvoiceDate.ToString() + "')";
+                                + invoice.InvoiceDate.ToString() + "')";
                 ///Database command that uses OleDB object to execute the string query
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Executes the query from the command
@@ -390,10 +393,7 @@ namespace _3280_Group_Project
             ///try to update invoice object in the database 
             try
             {
-                ///update grand total 
-                invoice.SubTotal = GetGrandTotal(invoice);
-                ///update Item Count
-                invoice.ItemCount = GetItemCount(invoice);
+               
 
                 ///query to update invoice object in the invoices table
                 string query = "UPDATE [Invoices]"
@@ -401,8 +401,6 @@ namespace _3280_Group_Project
                                 + "', [lastName] = '" + invoice.LastName.ToString()
                                 + "', [email] = '" + invoice.Email.ToString()
                                 + "', [address] = '" + invoice.Address.ToString()
-                                + "', [itemCount] = " + invoice.ItemCount.ToString()
-                                + ", [subTotal] = " + invoice.SubTotal.ToString()
                                 + ", [invoiceDate] = '" + invoice.InvoiceDate.ToString()
                                 + "' WHERE invoiceID = " + invoice.InvoiceID.ToString();
                 ///initialize new command to executr string query with OleDB Connection
