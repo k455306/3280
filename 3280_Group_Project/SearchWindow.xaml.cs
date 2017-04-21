@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace _3280_Group_Project
 {
@@ -20,6 +21,7 @@ namespace _3280_Group_Project
     public partial class SearchWindow : Window
     {
         InvoiceRepository myInvoices;
+        DataTable dt_Results;
 
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the invoices.
@@ -28,6 +30,11 @@ namespace _3280_Group_Project
         {
             InitializeComponent();
             //Call to getAllInvoices() which will return a list of Invoice Items that can then be inserted into the DataGrid
+            myInvoices = new InvoiceRepository();
+            dt_Results = new DataTable();
+
+            dt_Results = myInvoices.getAllInvoicesDT();
+            dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
         }
 
         /// <summary>
