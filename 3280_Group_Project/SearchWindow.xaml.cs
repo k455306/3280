@@ -182,15 +182,10 @@ namespace _3280_Group_Project
         {
             DataGrid grid = (DataGrid)sender;
             Invoice invoice = new Invoice();
-            IList<DataGridCellInfo> list = grid.SelectedCells;
-            foreach(DataGridCellInfo info in list)
-            {
-                //invoice.InvoiceID = info.Item;
-
-            }
-           
-
-            //TempSelect = selectedInvoice.InvoiceID;
+            DataRowView dataRow = (DataRowView)grid.SelectedItem;
+            int index = grid.CurrentCell.Column.DisplayIndex;
+            string cellValue = dataRow.Row.ItemArray[0].ToString();
+            TempSelect = Convert.ToInt32(cellValue);
         }
     }
 }
