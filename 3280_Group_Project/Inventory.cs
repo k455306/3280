@@ -73,7 +73,10 @@ namespace _3280_Group_Project
             ItemDescription = itemDescription; 
         }
 
-
+        /// <summary>
+        /// Override the ToString() method to give the print 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return ID + " " + ItemName + " " + ItemCost; 

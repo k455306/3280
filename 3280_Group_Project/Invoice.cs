@@ -55,6 +55,7 @@ namespace _3280_Group_Project
         /// </summary>
         public Invoice()
         {
+            
             ///Set FirstName = ""
             FirstName = "";
             //Set LastName = ""

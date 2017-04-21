@@ -51,7 +51,9 @@ namespace _3280_Group_Project
            //Update Invoice 
            invoice = db.SelectSingleInvoice(1);
           
+           ///Testing total and GrandTotal 
            decimal total = db.GetGrandTotal(invoice);
+           ///Testing count off of GetiTemCount
            decimal count = db.GetItemCount(invoice);
            
            
