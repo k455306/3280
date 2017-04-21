@@ -22,15 +22,34 @@ namespace _3280_Group_Project
     {
         SearchWindow MySearchWindow;
         UpdateWindow MyUpdateWindow;
+        List<Inventory> Inv;
+        List<Customer> Customers;
+        InvoiceRepository iR;
+
         public MainWindow()
         {
             InitializeComponent();
             //populate customer list
             //populate item list
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-
+            iR = new InvoiceRepository();
+            Inv = new List<Inventory>();
+            Inv = iR.getAllInventoryItems(); //Look at this line here
+            Customers = new List<Customer>();
+            Customers = iR.GetCustomers();
             MySearchWindow = new SearchWindow();
             MyUpdateWindow = new UpdateWindow();
+
+            foreach (Customer Customers in Customers)
+            {
+                customerBox.Items.Add(Customers.ToString());
+            }
+
+           foreach (Inventory Inv in Inv)
+           {
+                itemBox.Items.Add(Inv.ToString());
+           }
+            
 
         }
 

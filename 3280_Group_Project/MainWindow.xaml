@@ -28,7 +28,7 @@
         <Button x:Name="delItemBtn" Content="Delete Item" HorizontalAlignment="Left" Margin="224,141,0,0" VerticalAlignment="Top" Width="65" Height="21" FontSize="10.667"/>
         <TextBox x:Name="dateBox" HorizontalAlignment="Left" Height="22" Margin="330,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <Label x:Name="dateLbl" Content="Date" HorizontalAlignment="Left" Margin="330,35,0,0" VerticalAlignment="Top" FontSize="9.333"/>
-        <TextBox x:Name="customerName" HorizontalAlignment="Left" Height="23" Margin="56,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
+        <ComboBox x:Name="customerBox" HorizontalAlignment="Left" Margin="56,51,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
