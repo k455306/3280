@@ -43,16 +43,7 @@ namespace _3280_Group_Project
         /// </summary>
         [Required, Display(Name ="Address")]
         public string Address { get; set;}
-        /// <summary>
-        /// int ItemCount is the ammount of items that the invoice has
-        /// </summary>
-        [Required, Display(Name ="Item Count")]
-        public int ItemCount { get; set; }
-        /// <summary>
-        /// decimail SubTotal is the Grand total of all items for that Invoice
-        /// </summary>
-        [Required, DataType(DataType.Currency)]
-        public decimal SubTotal { get; set; }
+       
         /// <summary>
         /// InvoiceDate is the Date of the Invoice
         /// </summary>
@@ -72,10 +63,6 @@ namespace _3280_Group_Project
             Email = "";
             ///Set Address = "" 
             Address = "";
-            ///Set ItemCount = 0
-            ItemCount = 0;
-            ///Set Property SubTotal = 0
-            SubTotal = 0;
             ///Set Property InvoiceDate to todays date 
             InvoiceDate = DateTime.Now; 
         }
@@ -90,7 +77,7 @@ namespace _3280_Group_Project
         /// <param name="itemCount"></param>
         /// <param name="subtotal"></param>
         /// <param name="invoiceDate"></param>
-        public Invoice(int invoiceID, string firstName, string lastName, string email, string address, int itemCount, decimal subtotal, DateTime invoiceDate )
+        public Invoice(int invoiceID, string firstName, string lastName, string email, string address, DateTime invoiceDate )
         {
             ///Set InvoiceID to invoiceID Parameter
             InvoiceID = invoiceID; 
@@ -102,10 +89,6 @@ namespace _3280_Group_Project
             Email = email;
             ///Set Address to address Parameter
             Address = address;
-            ///Set ItemCount to itemCount Parameter
-            ItemCount = itemCount;
-            ///Set SubTotal to subtotal Parameter
-            SubTotal = subtotal;
             ///Set InvoiceDate to invoiceDate Parameter
             InvoiceDate = invoiceDate; 
         }
@@ -116,7 +99,7 @@ namespace _3280_Group_Project
         public override string ToString()
         {
             ///Return the InvoiceID, FirstName, LastName, ItemCount,and SubTotal as strings 
-            return InvoiceID.ToString() + "-" + FirstName + " " + LastName + "-" + ItemCount.ToString() + "-" + SubTotal.ToString();
+            return InvoiceID.ToString() + "-" + FirstName + " " + LastName ;
         }
 
     }
