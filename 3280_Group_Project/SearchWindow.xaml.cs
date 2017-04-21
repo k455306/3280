@@ -42,18 +42,27 @@ namespace _3280_Group_Project
             dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
             invoiceList = myInvoices.getAllInvoices();
             UpdateInvoiceCombo();
-            bIsFirstTime = false;
+            UpdateInvoiceTotals();
         }
 
         private void UpdateInvoiceCombo()
         {
-            if (bIsFirstTime == true)
-            {
                 for (int i = 0; i < invoiceList.Count; i++)
                 {
                     cb_InvoiceSelect.Items.Add(invoiceList[i].InvoiceID);
                 }
-            } 
+        }
+
+        private void UpdateInvoiceTotals()
+        {
+            foreach (Invoice X in invoiceList)
+            {
+                if (myInvoices.GetItemCount(X) > 0)
+                {
+                    decimal y = myInvoices.GetGrandTotal(X);
+                    cb_ChargeSelect.Items.Add(string.Format("{0:0.00}", y.ToString()));
+                }
+            }
         }
 
 
@@ -99,7 +108,18 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void cb_InvoiceSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DataRow myNewRow = dt_Results.NewRow();
+            int myID;
 
+            if(cb_InvoiceSelect.SelectedIndex != -1 && Int32.TryParse(cb_InvoiceSelect.SelectedValue.ToString(), out myID))
+            {
+                selectedInvoice =  myInvoices.SelectSingleInvoice(myID);
+                dt_Results.Clear();
+                myNewRow["ID"] = selectedInvoice.InvoiceID;
+                myNewRow["First"] = selectedInvoice.FirstName;
+                myNewRow["Last"] = selectedInvoice.LastName;
+                myNewRow["Date"] = selectedInvoice.InvoiceDate;
+            }
         }
 
         /// <summary>
