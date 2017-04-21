@@ -22,7 +22,6 @@ namespace _3280_Group_Project
         /// conn is set to the connection string of the database3
         /// </summary>
         internal string conn { get; set; } = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=../../AppData/Invoices.accdb";
-        
         /// <summary>
         /// Declaration for OleDBConnection
         /// </summary>
@@ -970,7 +969,6 @@ namespace _3280_Group_Project
             ///try and inserting new item into the 
             try
             {
-
                 ///Insert new items into the Def table 
                 string query = "INSERT INTO [Customer]([customerID], [custFirstName], [custLastName], [custAddress], [custEmail])"
                                 + "Values(" + cust.CustomerID.ToString() + ",'" + cust.CustFirstName + "','" + cust.CustLastName + "','" + cust.CustAddress + "','" + cust.CustEmail+ "')";
@@ -978,8 +976,6 @@ namespace _3280_Group_Project
                 OleDbCommand cmd = new OleDbCommand(query, OleDB);
                 ///Execute command 
                 cmd.ExecuteNonQuery();
-
-
             }
             catch (OleDbException ex)
             {
@@ -1149,7 +1145,6 @@ namespace _3280_Group_Project
             return item;
         }
 
-
         /// <summary>
         /// AddItem adds a new item to the Def Table
         /// </summary>
@@ -1182,7 +1177,10 @@ namespace _3280_Group_Project
 
         }
 
-
+        /// <summary>
+        /// Method UpdateInventoryItem passes in an inventory item. 
+        /// </summary>
+        /// <param name="item"></param>
         public void UpdateInventoryItem(Inventory item)
         {
             ///Try and update item in the Def table
