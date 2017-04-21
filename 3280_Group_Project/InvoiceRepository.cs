@@ -114,6 +114,44 @@ namespace _3280_Group_Project
         }
 
         /// <summary>
+        /// GetItemCount
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public int GetInvoiceCount()
+        {
+            ///count of items with the invoice id 
+            int total = 0;
+            ///DataTable to store Adaptor values 
+            DataTable dt = new DataTable();
+            ///Try and get the count of items of invoice
+            try
+            {
+                ///string query get count fo the itemID with invoice ID.
+                string query = "SELECT COUNT([InvoiceID]) FROM [Invoice]";
+                ///New Instance of OleDBCommand Command to database using query and connection 
+                OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
+                /// Get total of invoiceID
+                total = (int)accessCommand.ExecuteScalar();
+
+                ///return total 
+                return total;
+
+
+            }
+            catch (OleDbException ex)
+            {
+                ///Close Database Connection 
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+
+        }
+
+
+
+        /// <summary>
         /// get AllInvoicesDT gets all invoices and returns a DataTable
         /// </summary>
         /// <returns></returns>
@@ -366,6 +404,47 @@ namespace _3280_Group_Project
             ///Returns invoice object
             return invoice;
         }
+        
+        /// <summary>
+        /// Get invoices by grand total
+        /// </summary>
+        /// <param name="GrandTotol"></param>
+        /// <returns></returns>
+        public List<Invoice> GetInvoicesByCost(decimal GrandTotol)
+        {
+            ///Invoices list from get all invoices 
+            List<Invoice> invoices = new List<Invoice>();
+            ///invoice list that equals the grandtotal list 
+            List<Invoice> invoicesResult = new List<Invoice>();
+            ///Try and get list of the invoices with a grand total  
+            try
+            {
+                ///get all invoices 
+                invoices = getAllInvoices(); 
+                ///loop through all invoices 
+                foreach(Invoice invoice in invoices)
+                {
+                    ///check the grandTotal of invoice that has the the grand total passed in 
+                    if(GetGrandTotal(invoice) == GrandTotol)
+                    {
+                        ///add invoices that have the same grand total 
+                        invoicesResult.Add(invoice);
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+                OleDB.Close();
+                ///throws exception to the higher level method
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+
+            }
+            ///return list of invoices 
+            return invoicesResult; 
+        }
+
 
         /// <summary>
         /// Add invoice has parameter of Invoice object and has no return type
@@ -844,6 +923,9 @@ namespace _3280_Group_Project
             }
 
         }
+
+
+
 
 /////////////////////////////////////////////////////////////////////Customer Methods/////////////////////////////////////////////
 /// <summary>
