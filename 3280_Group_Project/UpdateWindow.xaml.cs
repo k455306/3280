@@ -19,6 +19,9 @@ namespace _3280_Group_Project
     /// </summary>
     public partial class UpdateWindow : Window
     {
+        InvoiceRepository myItems;
+        Inventory NewItem;
+
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the Items.
         /// </summary>
@@ -26,6 +29,8 @@ namespace _3280_Group_Project
         {
             InitializeComponent();
             //Call to InvoiceRepository.getAllItems() which will return a list of Invoice Items that can then be inserted into the DataGrid
+            myItems = new InvoiceRepository();
+            NewItem = new Inventory();
         }
 
         /// <summary>
@@ -56,7 +61,13 @@ namespace _3280_Group_Project
         /// <param name="e"></param>
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
+            decimal newItemCost = 0;
+            NewItem.ItemName = tb_Name.Text;
+            Decimal.TryParse(tb_Cost.Text, out newItemCost);
+            NewItem.ItemCost = newItemCost;
+
             //Call to the InvoiceRepository.AddItem method
+            myItems.AddInventoryItem(NewItem);
         }
 
         /// <summary>
