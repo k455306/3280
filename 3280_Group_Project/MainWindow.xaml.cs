@@ -199,20 +199,45 @@ namespace _3280_Group_Project
             totalBox.Clear();
         }
 
-        private void searchItems()
-        {
 
-        }
-        private void searchInvoice(int invNum)
+        public void searchInvoice(int invNum)
         {
+            ///Instantiate new invoice 
             Invoice invoice = new Invoice();
+            ///set invoice from the database
             invoice = iR.SelectSingleInvoice(invNum);
-
+            ///Call BuildMainWindow by invoice 
+            BuildMainWindow(invoice);
 
 
         }
+        /// <summary>
+        /// Method Build Main Window sets the Main Window with invoice that was searched 
+        /// </summary>
+        /// <param name="invoice"></param>
+        private void BuildMainWindow(Invoice invoice)
+        {
+            ///Instantiate new database repository 
+            InvoiceRepository Repo = new InvoiceRepository();
+            ///Get list of items
+            List<Def> listOfItems = Repo.SelectItemsSingleInvoice(invoice);
+            ///Clear customer combo box 
+            customerBox.Items.Clear();
+            ///Add items to customer box 
+            customerBox.Items.Add(invoice.ToString());
+            ///Clear itelist box 
+            itemListBox.Items.Clear(); 
+            ///Loop items and add to listBox
+            foreach(Def item in listOfItems)
+            {
+                ///add items
+                itemListBox.Items.Add(item.ToString());
+            }
+            ///set new date 
+            dateBox.Text = invoice.InvoiceDate.ToString(); 
+               
 
-        
+        }
 
 
     }
