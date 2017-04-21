@@ -989,7 +989,7 @@ namespace _3280_Group_Project
             try
             {
                 ///query string to bring back all invoices from database
-                string query = "SELECT * FROM [Def]";
+                string query = "SELECT * FROM [Inventory]";
                 ///New Instance of OleDBCommand Command to database using query and connection 
                 OleDbCommand accessCommand = new OleDbCommand(query, OleDB);
                 ///New Instance of OleDBAdator to store results from accessDBCommand 
@@ -1136,7 +1136,7 @@ namespace _3280_Group_Project
             try
             {
                 ///String query is to build the update statement to update the Def table
-                string query = "UPDATE [Def]"
+                string query = "UPDATE [Inventory]"
                                 + "SET"
                                 + ", [itemName] = " + item.ItemName
                                 + ", [itemCost] = " + item.ItemCost.ToString()
