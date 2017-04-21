@@ -91,7 +91,7 @@ namespace _3280_Group_Project
                 for (int i = 0; i < results.Count; i++)
                 {
                     ///give me each row of values 
-                    if (i % 8 == 0)
+                    if (i % 6 == 0)
                     {
                         ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
@@ -150,7 +150,7 @@ namespace _3280_Group_Project
                 for (int i = 0; i < results.Count; i++)
                 {
                     ///give me each row of values 
-                    if (i % 8 == 0)
+                    if (i % 6 == 0)
                     {
                         ///Adds new invoice to list of invoices
                         ///Adds new invoices to list of Invoices 
@@ -210,7 +210,7 @@ namespace _3280_Group_Project
                 for (int i = 0; i < results.Count; i++)
                 {
                     ///give me each row of values 
-                    if (i % 8 == 0)
+                    if (i % 6 == 0)
                     {
                         ///Adds new invoice to list of invoices
                         
@@ -269,7 +269,7 @@ namespace _3280_Group_Project
                 for (int i = 0; i < results.Count; i++)
                 {
                     ///give me each row of values 
-                    if (i % 8 == 0)
+                    if (i % 6 == 0)
                     {
                         ///Adds new invoices to list of Invoices 
                         invoices.Add(new Invoice(Convert.ToInt32(results[i]), results[i + 1], results[i + 2], results[i + 3], results[i + 4],
@@ -328,7 +328,7 @@ namespace _3280_Group_Project
                 for (int i = 0; i < results.Count; i++)
                 {
                     ///give me each row of values 
-                    if (i % 8 == 0)
+                    if (i % 6 == 0)
                     {
                         ///Create New Invoice Object
                        ///Adds new invoices to list of Invoices 
