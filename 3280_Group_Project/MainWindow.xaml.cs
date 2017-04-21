@@ -28,7 +28,8 @@ namespace _3280_Group_Project
         List<Invoice> Invoices;
         InvoiceRepository iR;
         decimal total;
-        public static int searchInv;
+        public static int searchInv
+        { get; set; } 
 
         public MainWindow()
         {
@@ -204,8 +205,15 @@ namespace _3280_Group_Project
         }
         private void searchInvoice(int invNum)
         {
-           
-         //  = iR.SelectSingleInvoice(invNum);
+            Invoice invoice = new Invoice();
+            invoice = iR.SelectSingleInvoice(invNum);
+
+
+
         }
+
+        
+
+
     }
 }
