@@ -36,16 +36,29 @@ namespace _3280_Group_Project
             dt_Results = new DataTable();
             invoiceList = new List<Invoice>();
             selectedInvoice = new Invoice();
+            newSearch();
+        }
 
+        private void newSearch()
+        {
             dt_Results = myInvoices.getAllInvoicesDT();
             dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
             invoiceList = myInvoices.getAllInvoices();
+            updateCombos();
+        }
+
+        private void updateCombos()
+        {
             UpdateInvoiceCombo();
             UpdateInvoiceTotals();
         }
 
+
+
         private void UpdateInvoiceCombo()
         {
+            cb_InvoiceSelect.Items.Clear();
+
                 for (int i = 0; i < invoiceList.Count; i++)
                 {
                     cb_InvoiceSelect.Items.Add(invoiceList[i].InvoiceID);
@@ -54,6 +67,8 @@ namespace _3280_Group_Project
 
         private void UpdateInvoiceTotals()
         {
+            cb_ChargeSelect.Items.Clear();
+
             foreach (Invoice X in invoiceList)
             {
                 if (myInvoices.GetItemCount(X) > 0)
@@ -146,9 +161,14 @@ namespace _3280_Group_Project
 
             if (cb_ChargeSelect.SelectedIndex != -1 && Decimal.TryParse(cb_ChargeSelect.SelectedValue.ToString(), out selCost))
             {
-               // dt_Results = myInvoices.GetInvoicesByCost(selCost);
+                dt_Results = myInvoices.GetInvoicesByCost(selCost);
                 dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
             }
+        }
+
+        private void btn_Clear_Click(object sender, RoutedEventArgs e)
+        {
+            newSearch();
         }
     }
 }

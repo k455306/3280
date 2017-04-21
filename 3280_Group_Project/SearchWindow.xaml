@@ -19,7 +19,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding Path=invoiceDate}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btn_Clear" Content="Clear Selection" HorizontalAlignment="Left" Margin="291,345,0,0" VerticalAlignment="Top" Width="95" Height="38"/>
+        <Button x:Name="btn_Clear" Content="Clear Selection" HorizontalAlignment="Left" Margin="291,345,0,0" VerticalAlignment="Top" Width="95" Height="38" Click="btn_Clear_Click"/>
         <Label x:Name="label" Content="Invoice Number" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="10,0,0,355" Width="150" Height="28"/>
         <Label x:Name="label_Copy" Content="Invoice Date" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="185,0,0,357" Width="150" Grid.ColumnSpan="2"/>
         <Label x:Name="label_Copy1" Content="Total Charge" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="355,0,0,357" Width="150"/>
