@@ -9,7 +9,13 @@
     <Grid Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}">
         <Button x:Name="btn_Delete" Content="Delete" HorizontalAlignment="Left" Margin="391,344,0,0" VerticalAlignment="Top" Width="114" Height="38"/>
         <Button x:Name="btn_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="114" Height="38" Click="btn_Cancel_Click"/>
-        <DataGrid x:Name="dg_UpdateDef" HorizontalAlignment="Left" VerticalAlignment="Top" Height="272" Width="495" Margin="10,68,0,0"/>
+        <DataGrid x:Name="dg_UpdateDef" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="272" Width="495" Margin="10,68,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Item" Binding="{Binding Path=itemName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=itemDescription}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost" Binding="{Binding Path=itemCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="194,344,0,0" VerticalAlignment="Top" Width="114" Height="38" Click="btn_Edit_Click"/>
         <Label x:Name="label" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="10,0,0,351" Width="95" Height="28" VerticalContentAlignment="Bottom"/>
         <Label x:Name="label_Copy" Content="Cost" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="3.2,1.534" Margin="105,0,0,353" Width="60" VerticalContentAlignment="Bottom"/>

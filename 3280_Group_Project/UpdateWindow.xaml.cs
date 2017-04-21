@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace _3280_Group_Project
 {
@@ -21,7 +22,8 @@ namespace _3280_Group_Project
     {
         InvoiceRepository myItems;
         Inventory NewItem;
-
+        DataTable dt_Results;
+        List<Inventory> myInventoryList;
         /// <summary>
         /// Initialization which also poplulates the DataGrid with all the Items.
         /// </summary>
@@ -31,7 +33,19 @@ namespace _3280_Group_Project
             //Call to InvoiceRepository.getAllItems() which will return a list of Invoice Items that can then be inserted into the DataGrid
             myItems = new InvoiceRepository();
             NewItem = new Inventory();
+            myInventoryList = new List<Inventory>();
+            dt_Results = new DataTable();
+
         }
+
+        private void newSearch()
+        {
+            myInventoryList = myItems.getAllInventoryItems();
+            //dg_InvoiceSearch.DataContext = dt_Results.DefaultView;
+            //invoiceList = myInvoices.getAllInvoices();
+            //updateCombos();
+        }
+
 
         /// <summary>
         /// When user clicks on the close window ('X') this ensures that is doesn't close the window, but rather, hides it.
@@ -65,6 +79,7 @@ namespace _3280_Group_Project
             NewItem.ItemName = tb_Name.Text;
             Decimal.TryParse(tb_Cost.Text, out newItemCost);
             NewItem.ItemCost = newItemCost;
+            NewItem.ItemDescription = tb_Description.Text;
 
             //Call to the InvoiceRepository.AddItem method
             myItems.AddInventoryItem(NewItem);
