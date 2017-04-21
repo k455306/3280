@@ -477,7 +477,7 @@ namespace _3280_Group_Project
         /// <param name="GrandTotal"></param>
         /// <returns></returns>
         public DataTable GetInvoicesByCost(decimal GrandTotal)
-        {
+       {
             ///Invoices list from get all invoices 
             List<Invoice> invoices = new List<Invoice>();
             ///invoice list that equals the grandtotal list 
